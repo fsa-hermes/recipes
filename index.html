@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mon Livre de Recettes</title>
+  <style>
+:root {
+  --bg: #faf9f6;
+  --fg: #2d2d2d;
+  --accent: #c0392b;
+  --accent-light: #e74c3c;
+  --card: #ffffff;
+  --border: #e0ddd8;
+  --muted: #6b6b6b;
+  --shadow: 0 2px 8px rgba(0,0,0,0.06);
+  --radius: 12px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+header {
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow);
+}
+
+header h1 {
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+}
+
+header p { color: var(--muted); margin-top: 0.5rem; }
+
+main { max-width: 800px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+.recipe {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.recipe:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
+
+.recipe-header { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; align-items: baseline; }
+
+.recipe h2 { font-size: 1.4rem; font-weight: 600; color: var(--fg); flex: 1; min-width: 200px; }
+
+.meta { display: flex; flex-wrap: wrap; gap: 0.5rem; font-size: 0.8rem; color: var(--muted); }
+
+.badge {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.badge-category { background: #fff3e0; border-color: #ffe0b2; color: #e65100; }
+.badge-difficulty-facile { background: #e8f5e9; border-color: #c8e6c9; color: #2e7d32; }
+.badge-difficulty-moyenne { background: #fff3e0; border-color: #ffe0b2; color: #e65100; }
+.badge-difficulty-difficile { background: #ffebee; border-color: #ffcdd2; color: #c62828; }
+
+.section { margin-top: 1.25rem; }
+
+.section-title {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.4rem;
+  margin-bottom: 0.75rem;
+}
+
+.ingredients { columns: 2; column-gap: 2rem; }
+.ingredients li { break-inside: avoid; margin-bottom: 0.3rem; }
+
+.steps { counter-reset: step; }
+.steps li {
+  list-style: none;
+  position: relative;
+  padding-left: 2rem;
+  margin-bottom: 0.75rem;
+}
+.steps li::before {
+  counter-increment: step;
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  background: var(--accent);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.notes {
+  background: #fdfbf7;
+  border-left: 3px solid var(--accent);
+  padding: 1rem;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  font-size: 0.9rem;
+}
+.notes ul { margin-left: 1.2rem; }
+.notes li { margin-bottom: 0.3rem; }
+
+hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+
+footer {
+  text-align: center;
+  padding: 2rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+  border-top: 1px solid var(--border);
+  margin-top: 2rem;
+}
+
+@media (max-width: 600px) {
+  .ingredients { columns: 1; }
+  .recipe { padding: 1rem; }
+}
+</style>
+</head>
+<body>
+  <header>
+    <h1>🍳 Mon Livre de Recettes</h1>
+    <p>19 recettes — fait main, à jour</p>
+  </header>
+  <main>
+    
+<article class="recipe">
+  <div class="recipe-header">
+    <h2>Ingrédients</h2>
+    
+  </div>
+  
+  
+  
+</article>
+<article class="recipe">
+  <div class="recipe-header">
+    <h2>Préparation</h2>
+    
+  </div>
+  
+  
+  
+</article>
+<article class="recipe">
+  <div class="recipe-header">
+    <h2>Notes</h2>
+    
+  </div>
+  
+  
+  
+</article>
+<article class="recipe">
+  <div class="recipe-header">
+    <h2>🥗 Salade niçoise</h2>
+    <div class="meta"><span class="badge badge-category">Entrée | **Difficulté :** Facile | **Temps :** Prépa 20 min | **Portions :** 4 | **Coût :** €€</span></div>
+  </div>
+  
+  
+  
+</article>
+<article class="recipe">
+  <div class="recipe-header">
+    <h2>Ingrédients</h2>
+    
+  </div>
+  
+  
+  
+</article>
+<article class="recipe">
+  <div class="recipe-header">
+    <h2>Préparation</h2>
+    
+  </div>
+  
+  
+  
+</article>
+<article class="recipe">
+  <div class="recipe-header">
+    <h2>Notes</h2>
+    
+  </div>
+  
+  
+  
+</article>
+<article class="recipe">
+  <div class="recipe-header">
+    <h2>🍝 Pâtes carbonara (version traditionnelle)</h2>
+    <div class="meta"><span class="badge badge-category">Plat | **Difficulté :** Facile | **Temps :** Prépa 10 min | Cuisson 15 min | **Portions :** 4 | **Coût :** €</span></div>
+  </div>
+  
+  
+  
+</article>
+<article class="recipe">
+  <div class="recipe-header">
+    <h2>Ingrédients</h2>
+    
+  </div>
+  
+  
+  
+</article>
+<article class="recipe">
+  <div class="recipe-header">
+    <h2>Préparation</h2>
+    
+  </div>
+  
+  
+  
+</article>
+<article class="recipe">
+  <div class="recipe-header">
+    <h2>Notes</h2>
+    
+  </div>
+  
+  
+  
+</article>
+<article class="recipe">
+  <div class="recipe-header">
+    <h2>🍰 Tarte aux pommes normande</h2>
+    <div class="meta"><span class="badge badge-category">Dessert | **Difficulté :** Moyenne | **Temps :** Prépa 30 min | Cuisson 40 min | **Portions :** 6-8 | **Coût :** €</span></div>
+  </div>
+  
+  
+  
+</article>
+<article class="recipe">
+  <div class="recipe-header">
+    <h2>Ingrédients</h2>
+    
+  </div>
+  
+  
+  
+</article>
+<article class="recipe">
+  <div class="recipe-header">
+    <h2>Préparation</h2>
+    
+  </div>
+  
+  
+  
+</article>
+<article class="recipe">
+  <div class="recipe-header">
+    <h2>Notes</h2>
+    
+  </div>
+  
+  
+  
+</article>
+<article class="recipe">
+  <div class="recipe-header">
+    <h2>🍲 Blanquette de veau</h2>
+    <div class="meta"><span class="badge badge-category">Plat | **Difficulté :** Moyenne | **Temps :** Prépa 30 min | Cuisson 1h30 | **Portions :** 6 | **Coût :** €€€</span></div>
+  </div>
+  
+  
+  
+</article>
+<article class="recipe">
+  <div class="recipe-header">
+    <h2>Ingrédients</h2>
+    
+  </div>
+  
+  
+  
+</article>
+<article class="recipe">
+  <div class="recipe-header">
+    <h2>Préparation</h2>
+    
+  </div>
+  
+  
+  
+</article>
+<article class="recipe">
+  <div class="recipe-header">
+    <h2>Notes</h2>
+    
+  </div>
+  
+  
+  
+</article>
+  </main>
+  <footer>
+    Généré automatiquement depuis <code>content/recettes.md</code> • 
+    <a href="content/recettes.md" style="color:var(--accent);">Voir la source</a>
+  </footer>
+</body>
+</html>
