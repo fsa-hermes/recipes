@@ -638,7 +638,7 @@ def parse_recipes(md_text):
     # Split sur les titres de recettes (### + emoji ou texte), pas sur les sections
     # Les sections sont : ### Ingrédients, ### Préparation, ### Notes
     # Les recettes commencent par ### 🧀 ou ### 🥘 etc.
-    parts = re.split(r'\n###\s+(?=[🥘🍳🍲🥗🍝🍕🍔🌮🍣🍤🍛🍜🍚🥞🧁🍰🍪🍩🍫🍬🍭🍮🍦🍨🍧🥧🍯🥛☕🍵🍶🍺🍻🥂🍷🥃🍸🍹🍾])', content_after_recettes)
+    parts = re.split(r'\n###\s+(?=[🧀🥘🍳🍲🥗🍝🍕🍔🌮🍣🍤🍛🍜🍚🥞🧁🍰🍪🍩🍫🍬🍭🍮🍦🍨🍧🥧🍯🥛☕🍵🍶🍺🍻🥂🍷🥃🍸🍹🍾])', content_after_recettes)
     
     recipes = []
     
@@ -656,7 +656,7 @@ def parse_recipes(md_text):
         
         # Strip "### " prefix and emoji from recipe name
         name = re.sub(r'^###\s*', '', name)
-        name = re.sub(r'^[🥘🍳🍲🥗🍝🍕🍔🌮🍣🍤🍛🍜🍚🥞🧁🍰🍪🍩🍫🍬🍭🍮🍦🍨🍧🥧🍯🥛☕🍵🍶🍺🍻🥂🍷🥃🍸🍹🍾]\s*', '', name)
+        name = re.sub(r'^[🧀🥘🍳🍲🥗🍝🍕🍔🌮🍣🍤🍛🍜🍚🥞🧁🍰🍪🍩🍫🍬🍭🍮🍦🍨🍧🥧🍯🥛☕🍵🍶🍺🍻🥂🍷🥃🍸🍹🍾]\s*', '', name)
             
         recipe = {'name': name, 'meta': {}, 'ingredients': [], 'steps': [], 'notes': []}
         
