@@ -628,15 +628,32 @@ if (document.readyState === 'loading') {
 
 def parse_recipes(md_text):
     """Parse le markdown en liste de dicts recettes."""
-    parts = re.split(r'\n###\s+', md_text)
+    # Trouver la section "## Recettes" et ne parser que ce qui suit
+    recettes_match = re.search(r'\n## Recettes\n', md_text)
+    if not recettes_match:
+        return []
+    
+    content_after_recettes = md_text[recettes_match.end():]
+    
+    # Split sur les titres de recettes (### + emoji ou texte), pas sur les sections
+    # Les sections sont : ### Ingrédients, ### Préparation, ### Notes
+    # Les recettes commencent par ### 🧀 ou ### 🥘 etc.
+    parts = re.split(r'\n###\s+(?=[🥘🍳🍲🥗🍝🍕🍔🌮🍣🍤🍛🍜🍚🥞🧁🍰🍪🍩🍫🍬🍭🍮🍦🍨🍧🥧🍯🥛☕🍵🍶🍺🍻🥂🍷🥃🍸🍹🍾])', content_after_recettes)
+    
     recipes = []
     
-    for part in parts[1:]:
+    for part in parts:
+        if not part.strip():
+            continue
         lines = part.strip().split('\n')
         if not lines:
             continue
-            
+           
         name = lines[0].strip()
+        # Skip section headings that might have slipped through
+        if name.lower() in ('ingrédients', 'ingredients', 'préparation', 'preparation', 'notes'):
+            continue
+            
         recipe = {'name': name, 'meta': {}, 'ingredients': [], 'steps': [], 'notes': []}
         
         current_section = None
@@ -667,7 +684,7 @@ def parse_recipes(md_text):
                 item = re.sub(r'^\d+\.\s*', '', line).strip()
                 if item:
                     recipe['steps'].append(item)
-        
+       
         if recipe['name']:
             recipes.append(recipe)
     
