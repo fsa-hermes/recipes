@@ -653,6 +653,10 @@ def parse_recipes(md_text):
         # Skip section headings that might have slipped through
         if name.lower() in ('ingrédients', 'ingredients', 'préparation', 'preparation', 'notes'):
             continue
+        
+        # Strip "### " prefix and emoji from recipe name
+        name = re.sub(r'^###\s*', '', name)
+        name = re.sub(r'^[🥘🍳🍲🥗🍝🍕🍔🌮🍣🍤🍛🍜🍚🥞🧁🍰🍪🍩🍫🍬🍭🍮🍦🍨🍧🥧🍯🥛☕🍵🍶🍺🍻🥂🍷🥃🍸🍹🍾]\s*', '', name)
             
         recipe = {'name': name, 'meta': {}, 'ingredients': [], 'steps': [], 'notes': []}
         
