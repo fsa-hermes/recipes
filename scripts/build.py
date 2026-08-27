@@ -667,7 +667,20 @@ def parse_recipes(md_text):
             m = re.match(r'\*\*([^*]+)\*\*\s*:\s*(.+)', line)
             if m:
                 key, val = m.groups()
-                recipe['meta'][key.strip()] = val.strip()
+                # Handle case where meta line contains multiple key: value pairs separated by |
+                # e.g., **Catégorie :** Entrée | **Difficulté :** Facile | **Temps :** ...
+                if '|' in val and '**' in val:
+                    # Split by | and parse each pair
+                    pairs = val.split(' | ')
+                    for pair in pairs:
+                        pair = pair.strip()
+                        sub_m = re.match(r'\*\*([^*]+)\*\*\s*:\s*(.+)', pair)
+                        if sub_m:
+                            sub_key, sub_val = sub_m.groups()
+                            recipe['meta'][sub_key.strip()] = sub_val.strip()
+                    recipe['meta'][key.strip()] = pairs[0].split('**')[0].strip()  # first value
+                else:
+                    recipe['meta'][key.strip()] = val.strip()
                 continue
             
             if line.startswith('### '):
