@@ -670,8 +670,12 @@ def parse_recipes(md_text):
                 # Handle case where meta line contains multiple key: value pairs separated by |
                 # e.g., **Catégorie :** Entrée | **Difficulté :** Facile | **Temps :** ...
                 if '|' in val and '**' in val:
-                    # Split by | and parse each pair
-                    pairs = val.split(' | ')
+                    # First value goes with the first key
+                    first_val = val.split(' | ')[0].strip()
+                    recipe['meta'][key.strip()] = first_val
+                    # Parse remaining pairs
+                    remaining = ' | '.join(val.split(' | ')[1:])
+                    pairs = remaining.split(' | ')
                     for pair in pairs:
                         pair = pair.strip()
                         sub_m = re.match(r'\*\*([^:]+?)\s*:\*\*\s*(.+)', pair)
