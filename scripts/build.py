@@ -664,7 +664,7 @@ def parse_recipes(md_text):
         for line in lines[1:]:
             line = line.rstrip()
             
-            m = re.match(r'\*\*([^:]+?)\s*:\s*(.+)', line)
+            m = re.match(r'\*\*([^:]+?)\s*:\*\*\s*(.+)', line)
             if m:
                 key, val = m.groups()
                 # Handle case where meta line contains multiple key: value pairs separated by |
@@ -674,11 +674,9 @@ def parse_recipes(md_text):
                     pairs = val.split(' | ')
                     for pair in pairs:
                         pair = pair.strip()
-                        sub_m = re.match(r'\*\*([^:]+?)\s*:\s*(.+)', pair)
+                        sub_m = re.match(r'\*\*([^:]+?)\s*:\*\*\s*(.+)', pair)
                         if sub_m:
                             sub_key, sub_val = sub_m.groups()
-                            # Strip leading ** from value
-                            sub_val = re.sub(r'^\*\*\s*', '', sub_val)
                             recipe['meta'][sub_key.strip()] = sub_val.strip()
                 else:
                     recipe['meta'][key.strip()] = val.strip()
