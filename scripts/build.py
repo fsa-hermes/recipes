@@ -457,6 +457,7 @@ function renderCategories(categories) {
 }
 
 function renderRecipes() {
+  console.log('[Recipes] Rendering', state.filtered.length, 'recipes');
   if (state.filtered.length === 0) {
     els.recipesGrid.style.display = 'none';
     els.emptyState.style.display = 'block';
@@ -497,6 +498,7 @@ function renderRecipes() {
       </div>
     </article>
   `).join('');
+  console.log('[Recipes] Done rendering');
 }
 
 function renderTags(meta) {
@@ -570,8 +572,10 @@ function closeSidebar() {
 
 // ─── Init ─────────────────────────────────────────────────────────────
 function init() {
+  console.log('[Init] Starting...');
   // Load embedded recipe data
   state.recipes = window.RECIPES_DATA || [];
+  console.log('[Init] Loaded', state.recipes.length, 'recipes from RECIPES_DATA');
   state.filtered = [...state.recipes];
   
   // Render initial
@@ -616,6 +620,8 @@ function init() {
       els.searchInput.focus();
     }
   });
+  
+  console.log('[Init] Complete');
 }
 
 // ─── Start ────────────────────────────────────────────────────────────
@@ -648,7 +654,7 @@ def parse_recipes(md_text):
         lines = part.strip().split('\n')
         if not lines:
             continue
-           
+          
         name = lines[0].strip()
         # Skip section headings that might have slipped through
         if name.lower() in ('ingrédients', 'ingredients', 'préparation', 'preparation', 'notes'):
@@ -657,7 +663,7 @@ def parse_recipes(md_text):
         # Strip "### " prefix and emoji from recipe name
         name = re.sub(r'^###\s*', '', name)
         name = re.sub(r'^[🧀🥘🍳🍲🥗🍝🍕🍔🌮🍣🍤🍛🍜🍚🥞🧁🍰🍪🍩🍫🍬🍭🍮🍦🍨🍧🥧🍯🥛☕🍵🍶🍺🍻🥂🍷🥃🍸🍹🍾]\s*', '', name)
-            
+           
         recipe = {'name': name, 'meta': {}, 'ingredients': [], 'steps': [], 'notes': []}
         
         current_section = None
@@ -704,7 +710,7 @@ def parse_recipes(md_text):
                 item = re.sub(r'^\d+\.\s*', '', line).strip()
                 if item:
                     recipe['steps'].append(item)
-       
+      
         if recipe['name']:
             recipes.append(recipe)
     
